@@ -1,6 +1,7 @@
 package my.study.springecommercestudy.controller;
 
 import my.study.springecommercestudy.dto.JoinRequest;
+import my.study.springecommercestudy.dto.LoginRequest;
 import my.study.springecommercestudy.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +29,8 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(String username) {
-        return ResponseEntity.ok("token");
+    public ResponseEntity<String> login(@RequestBody final LoginRequest loginRequest) {
+        return ResponseEntity.ok(memberService.login(loginRequest));
     }
 
 
