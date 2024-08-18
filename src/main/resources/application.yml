@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-eCommerce-study
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+jwt:
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InN0dWR5IiwiaWF0IjoxNTE2MjM5MDIyfQf9o8eEdjeSeVHoekOSiMTA1LbRXTYPAyCxKj0L5mo
+  expiration: 100000
+
