@@ -33,6 +33,4 @@ public class MemberController {
         return ResponseEntity.ok(memberService.login(loginRequest));
     }
 
-
-    // get 아무거나 해서 테스트
 }
