@@ -1,4 +1,4 @@
-package my.study.springecommercestudy.util;
+package my.study.springecommercestudy.config.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

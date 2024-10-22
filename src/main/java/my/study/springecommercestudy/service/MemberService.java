@@ -4,7 +4,7 @@ import my.study.springecommercestudy.domain.Member;
 import my.study.springecommercestudy.dto.JoinRequest;
 import my.study.springecommercestudy.dto.LoginRequest;
 import my.study.springecommercestudy.repository.MemberRepository;
-import my.study.springecommercestudy.util.JwtGenerator;
+import my.study.springecommercestudy.config.jwt.JwtGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
