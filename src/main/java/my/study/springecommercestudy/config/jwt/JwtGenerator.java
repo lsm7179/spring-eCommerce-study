@@ -14,13 +14,11 @@ import java.util.Date;
 @Component
 public class JwtGenerator {
 
-    private final String secretKeyValue;
     private final long expiration;
     private final SecretKey secretKey;
 
     public JwtGenerator(@Value("${jwt.secret}") String secretKey
             , @Value("${jwt.expiration}") long expiration) {
-        this.secretKeyValue = secretKey;
         this.expiration = expiration;
         this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
@@ -36,12 +34,32 @@ public class JwtGenerator {
                 .compact();
     }
 
-    public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(secretKeyValue)
+    public Member extractClaims(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(secretKey)
                 .build()
-                .parseSignedClaims(token)
-                .getBody();
+                .parseSignedClaims(removeBearer(token))
+                .getPayload();
+
+        String email = (String) claims.getOrDefault("email", "");
+        Long id = (Long) claims.getOrDefault("id", 0L);
+        String name = (String) claims.getOrDefault("name", "");
+
+        return new Member(id, email, name);
+
     }
 
+    public boolean validateToken(String token) {
+        return !Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(removeBearer(token))
+                .getPayload()
+                .getExpiration()
+                .before(new Date());
+    }
+
+    private String removeBearer(String token) {
+        return token.replace("Bearer", "").trim();
+    }
 }

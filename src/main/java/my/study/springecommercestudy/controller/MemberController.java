@@ -1,5 +1,7 @@
 package my.study.springecommercestudy.controller;
 
+import my.study.springecommercestudy.config.jwt.JwtAuthorization;
+import my.study.springecommercestudy.domain.Member;
 import my.study.springecommercestudy.dto.JoinRequest;
 import my.study.springecommercestudy.dto.LoginRequest;
 import my.study.springecommercestudy.dto.MyProfileResponse;
@@ -36,9 +38,8 @@ public class MemberController {
     }
 
     @GetMapping("my-profile")
-    public ResponseEntity<MyProfileResponse> getMyProfile() {
-        // TODD
-        return null;
+    public ResponseEntity<MyProfileResponse> getMyProfile(@JwtAuthorization Member member) {
+        return ResponseEntity.ok(MyProfileResponse.of(member));
     }
 
 }
