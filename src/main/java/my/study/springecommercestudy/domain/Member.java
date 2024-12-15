@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
@@ -22,9 +23,19 @@ public class Member {
     protected Member() {
     }
 
+    public static Member emptyMember() {
+        return new Member();
+    }
+
     public Member(String email, String password, String name) {
         this.email = email;
         this.password = password;
+        this.name = name;
+    }
+
+    public Member(Long id, String email, String name) {
+        this.id = id;
+        this.email = email;
         this.name = name;
     }
 

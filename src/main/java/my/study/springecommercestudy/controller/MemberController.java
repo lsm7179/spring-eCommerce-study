@@ -1,9 +1,13 @@
 package my.study.springecommercestudy.controller;
 
+import my.study.springecommercestudy.config.jwt.JwtAuthorization;
+import my.study.springecommercestudy.domain.Member;
 import my.study.springecommercestudy.dto.JoinRequest;
 import my.study.springecommercestudy.dto.LoginRequest;
+import my.study.springecommercestudy.dto.MyProfileResponse;
 import my.study.springecommercestudy.service.MemberService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +35,11 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody final LoginRequest loginRequest) {
         return ResponseEntity.ok(memberService.login(loginRequest));
+    }
+
+    @GetMapping("my-profile")
+    public ResponseEntity<MyProfileResponse> getMyProfile(@JwtAuthorization Member member) {
+        return ResponseEntity.ok(MyProfileResponse.of(member));
     }
 
 }
